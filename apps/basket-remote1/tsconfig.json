@@ -16,7 +16,7 @@
     "noEmit": false,
     "jsx": "react-jsx"
   },
-  "include": ["src/**/*", "../host1/src/store/cartSlice.ts"],
+  "include": ["src/**/*"],
   "paths": {
     "basketRemote/*": ["types/basketRemote/*"]
   }
