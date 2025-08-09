@@ -7,17 +7,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { addToCart } from "../store/cartSlice";
 import { toast } from "react-hot-toast";
-import {
-  Card,
-  Button,
-  Typography,
-  Spin,
-  Row,
-  Col,
-  Image,
-  message,
-  Result,
-} from "antd";
+import { Card, Button, Typography, Spin, Row, Col, Image, Result } from "antd";
 import {
   ShoppingCartOutlined,
   DollarOutlined,
