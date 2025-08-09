@@ -1,3 +1,4 @@
+https://mikro-frontend-react-byrs.vercel.app/
 # 📦 React Micro-Frontend E-Ticaret Projesi
 
 Bu proje, **Webpack 5 Module Federation** kullanılarak mikro-frontend mimarisi ile geliştirilmiş bir e-ticaret uygulamasıdır.  
