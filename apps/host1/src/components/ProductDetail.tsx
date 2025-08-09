@@ -7,12 +7,23 @@ import { useParams, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { addToCart } from "../store/cartSlice";
 import { toast } from "react-hot-toast";
-import { Card, Button, Typography, Spin, Row, Col, Image, Result } from "antd";
+import {
+  Card,
+  Button,
+  Typography,
+  Spin,
+  Row,
+  Col,
+  Image,
+  Result,
+  Divider,
+} from "antd";
 import {
   ShoppingCartOutlined,
   DollarOutlined,
   ShoppingOutlined,
 } from "@ant-design/icons";
+
 const { Meta } = Card;
 const { Title, Paragraph } = Typography;
 
@@ -27,7 +38,9 @@ const ProductDetail: React.FC = () => {
 
   const handleAddToCart = (item: any) => {
     dispatch(addToCart(item));
-    toast.success(`${item?.title} sepete eklendi`);
+    toast.success(`${item?.title} sepete eklendi`, {
+      position: "bottom-center",
+    });
   };
 
   const handleRelatedProductClick = (productId: number) => {
@@ -51,8 +64,8 @@ const ProductDetail: React.FC = () => {
         title="404"
         subTitle="Ürün bulunamadı veya bir hata oluştu."
         extra={
-          <Button type="primary" href="/">
-            Ana Sayfa
+          <Button type="primary" onClick={() => navigate("/")}>
+            Ana Sayfaya Dön
           </Button>
         }
       />
@@ -67,31 +80,45 @@ const ProductDetail: React.FC = () => {
 
   return (
     <div style={{ padding: "20px" }}>
-      <Card>
-        {/* İçeriklerin duyarlı bir şekilde yan yana/alt alta gelmesini sağlar */}
-        <Row gutter={[32, 32]}>
-          {/* Ekran boyutuna göre resim kolonunu ayarlar */}
-          <Col xs={24} md={10}>
+      <Card
+        style={{ borderRadius: "10px", boxShadow: "0 4px 8px rgba(0,0,0,0.1)" }}
+      >
+        <Row gutter={[32, 32]} justify="center" align="middle">
+          {/* Ürün Resim Alanı */}
+          <Col xs={24} md={10} style={{ textAlign: "center" }}>
             <Image
               src={product.image}
               alt={product.title}
-              // Resmin orantılı şekilde alana sığmasını sağlar
-              style={{ width: "100%", objectFit: "contain" }}
+              style={{
+                width: "100%",
+                maxWidth: "400px",
+                height: "auto",
+                objectFit: "contain",
+                borderRadius: "8px",
+              }}
             />
           </Col>
-          {/* Ekran boyutuna göre detay kolonunu ayarlar */}
+          {/* Ürün Detayları Alanı */}
           <Col xs={24} md={14}>
             <Title level={2}>{product.title}</Title>
-            <Title level={4} style={{ color: "green" }}>
+            <Paragraph type="secondary" style={{ fontSize: "16px" }}>
+              Kategori:{" "}
+              <span style={{ textTransform: "capitalize" }}>
+                {product.category}
+              </span>
+            </Paragraph>
+            <Title level={4} style={{ color: "#389e0d", margin: "16px 0" }}>
               <DollarOutlined /> {product.price.toFixed(2)}
             </Title>
-            <Paragraph>{product.description}</Paragraph>
+            <Paragraph style={{ fontSize: "16px", lineHeight: "1.6" }}>
+              {product.description}
+            </Paragraph>
             <Button
               type="primary"
               size="large"
               icon={<ShoppingCartOutlined />}
               onClick={() => handleAddToCart(product)}
-              style={{ marginTop: "1rem" }}
+              style={{ marginTop: "1rem", width: "100%", maxWidth: "300px" }}
             >
               Sepete Ekle
             </Button>
@@ -99,30 +126,41 @@ const ProductDetail: React.FC = () => {
         </Row>
       </Card>
 
+      {/* İlgili Ürünler Bölümü */}
       {relatedProducts.length > 0 && (
         <div style={{ marginTop: "40px" }}>
-          <Title level={3}>
-            <ShoppingOutlined /> Sık Alınan Ürünler
-          </Title>
-          {/* Benzer ürünler için duyarlı grid düzeni */}
-          <Row gutter={[16, 16]}>
+          <Divider orientation="left">
+            <Title level={3} style={{ margin: 0 }}>
+              <ShoppingOutlined /> Benzer Ürünler
+            </Title>
+          </Divider>
+          <Row gutter={[16, 16]} style={{ marginTop: "20px" }}>
             {relatedProducts.map((p) => (
-              // Farklı ekranlarda kolon sayısını belirler
               <Col key={p.id} xs={24} sm={12} md={8} lg={6}>
                 <Card
                   hoverable
                   onClick={() => handleRelatedProductClick(p.id)}
+                  style={{ borderRadius: "8px" }}
                   cover={
-                    <img
-                      alt={p.title}
-                      src={p.image}
-                      // Resim boyutlandırması
+                    <div
                       style={{
                         height: "200px",
-                        objectFit: "contain",
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
                         padding: "10px",
                       }}
-                    />
+                    >
+                      <img
+                        alt={p.title}
+                        src={p.image}
+                        style={{
+                          maxHeight: "100%",
+                          maxWidth: "100%",
+                          objectFit: "contain",
+                        }}
+                      />
+                    </div>
                   }
                   actions={[
                     <Button
