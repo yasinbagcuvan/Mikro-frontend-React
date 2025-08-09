@@ -1,0 +1,10 @@
+.responsive-basket-icon {
+  display: none; /* Desktop’ta gizli */
+}
+
+@media (max-width: 992px) {
+  /* 992px altındaki ekranlarda göster */
+  .responsive-basket-icon {
+    display: block !important;
+  }
+}
