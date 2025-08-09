@@ -34,7 +34,7 @@ module.exports = {
       name: "host1",
       remotes: {
         basketRemote:
-          "basketRemote@https://basket-remote1.vercel.app/remoteEntry.js",
+          "basketRemote@https://mikro-frontend-react.vercel.app/remoteEntry.js",
       },
       shared: {
         react: {
