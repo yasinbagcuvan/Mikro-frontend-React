@@ -66,7 +66,7 @@ const Navbar: React.FC = () => {
     >
       <div style={{ marginRight: 20 }}>
         <Link to="/">
-          <Title level={3} style={{ margin: 0 }}>
+          <Title level={4} style={{ margin: 0 }}>
             Kayra Export
           </Title>
         </Link>
