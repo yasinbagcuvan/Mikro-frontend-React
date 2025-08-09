@@ -33,7 +33,8 @@ module.exports = {
     new ModuleFederationPlugin({
       name: "host1",
       remotes: {
-        basketRemote: "basketRemote@http://localhost:3002/remoteEntry.js",
+        basketRemote:
+          "basketRemote@https://basket-remote1.vercel.app/remoteEntry.js",
       },
       shared: {
         react: {
